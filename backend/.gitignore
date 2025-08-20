@@ -1,7 +1,11 @@
-# prod
+# -------------------
+# Production build
+# -------------------
 dist/
 
-# dev
+# -------------------
+# Development
+# -------------------
 .yarn/
 !.yarn/releases
 .vscode/*
@@ -11,16 +15,23 @@ dist/
 .idea/usage.statistics.xml
 .idea/shelf
 
-# deps
+# -------------------
+# Dependencies
+# -------------------
 node_modules/
-.wrangler
+.wrangler/
+wrangler.*
 
-# env
+# -------------------
+# Environment variables
+# -------------------
 .env
 .env.production
 .dev.vars
 
-# logs
+# -------------------
+# Logs
+# -------------------
 logs/
 *.log
 npm-debug.log*
@@ -29,7 +40,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# misc
+# -------------------
+# OS / Misc
+# -------------------
 .DS_Store
 
-/src/generated/prisma
+# -------------------
+# Prisma
+# -------------------
+/src/generated/prisma/
+prisma/migrations/
+prisma/migration_lock.toml
