@@ -1,0 +1,27 @@
+# -------------------
+# Production build
+# -------------------
+dist/
+
+# -------------------
+# Development
+# -------------------
+.yarn/
+!.yarn/releases
+.vscode/*
+!.vscode/launch.json
+!.vscode/*.code-snippets
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf
+
+# -------------------
+# Dependencies
+# -------------------
+node_modules/
+
+# -------------------
+# OS / Misc
+# -------------------
+.DS_Store
+

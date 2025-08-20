@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { prismaMiddleware } from "../middleware/prismaMiddleware";
 import { PrismaClient } from '../generated/prisma/edge'
 import { authMiddleware } from "../middleware/authMiddleware";
+import { createPostInputs, updatePostInputs } from "@resok/medium-common";
 
 const blog = new Hono()
 
@@ -14,6 +15,13 @@ blog.post('/', authMiddleware, prismaMiddleware, async(c) => {
             title: string
             content: string
         };
+
+        const { success } = createPostInputs.safeParse(body);
+
+        if(!success){
+            return c.json({ message: "Invalid Inputs" }, 411)
+        }
+
         const createdPost = await prisma.post.create({
             data: {
                 title: body.title,
@@ -41,6 +49,13 @@ blog.put('/', authMiddleware, prismaMiddleware, async(c) => {
             title: string
             content: string
         };
+
+        const { success } = updatePostInputs.safeParse(body);
+
+        if(!success){
+            return c.json({ message: "Invalid Inputs" }, 411)
+        }
+
         const updatedPost = await prisma.post.update({
             data: {
                 title: body.title,

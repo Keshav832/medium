@@ -3,6 +3,8 @@ import { prismaMiddleware } from "../middleware/prismaMiddleware";
 import { PrismaClient } from '../generated/prisma/edge'
 import { generateSalt, hashPasswordWithSalt } from "../utils/crypto";
 import { sign } from "hono/jwt"
+import { signinInputs, signupInputs } from "@resok/medium-common";
+
 
 const user = new Hono<{
   Bindings:{
@@ -21,6 +23,12 @@ user.post('/signup', prismaMiddleware, async(c) => {
             password: string
             name?: string
         };
+
+        const { success } = signupInputs.safeParse(body);
+
+        if(!success){
+            return c.json({ message: "Invalid Inputs" }, 411)
+        }
     
         const salt = await generateSalt();
         const passwordHash = await hashPasswordWithSalt(body.password, salt);
@@ -51,6 +59,12 @@ user.post('/signin', prismaMiddleware, async(c) => {
 
     try {
         const body = await c.req.json()
+
+        const { success } = signinInputs.safeParse(body);
+
+        if(!success){
+            return c.json({ message: "Invalid Inputs" }, 411)
+        }
 
         const user = await prisma.user.findUnique({
             where: {
