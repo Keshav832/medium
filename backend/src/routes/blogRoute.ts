@@ -78,13 +78,24 @@ blog.put('/', authMiddleware, prismaMiddleware, async(c) => {
 
 blog.get('/bulk', authMiddleware, prismaMiddleware, async(c) => {
     const prisma = c.get("prisma") as PrismaClient;
-    const userID = c.var.userId;
 
     try {
-        const postId = c.req.param('id')
-        const reqPost = await prisma.post.findMany({});
+        const reqPost = await prisma.post.findMany({
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        });
 
-        return c.json(reqPost);
+        return c.json({
+            reqPost
+        });
     } catch (error) {
         console.error(error);
         return c.json({ message: 'unsuccessful' }, 400);
@@ -100,10 +111,22 @@ blog.get('/:id', authMiddleware, prismaMiddleware, async(c) => {
         const reqPost = await prisma.post.findUnique({
             where: {
                 id: postId
+            },
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         })
 
-        return c.json( reqPost )
+        return c.json({
+            reqPost
+        });
     } catch (error) {
         console.error(error);
         return c.json({ message: 'unsuccessful' }, 400);

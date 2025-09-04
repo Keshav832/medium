@@ -21,7 +21,7 @@ user.post('/signup', prismaMiddleware, async(c) => {
         const body = await c.req.json() as {
             email: string
             password: string
-            name?: string
+            name: string
         };
 
         const { success } = signupInputs.safeParse(body);
@@ -79,7 +79,7 @@ user.post('/signin', prismaMiddleware, async(c) => {
         const hashed = await hashPasswordWithSalt(body.password, user.salt);
 
         if (hashed !== user.passwordHash) {
-        return c.json({ message: 'Invalid credentials' }, 401);
+        return c.json({ message: 'Invalid password' }, 401);
         }
 
         const token = await sign({ id: user.id }, c.env.JWT_SECRET);
