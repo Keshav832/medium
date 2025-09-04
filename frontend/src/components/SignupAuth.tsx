@@ -4,7 +4,7 @@ import { type SignupInputs } from "@resok/medium-common";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
-export const Auth = () => {
+export const SignupAuth = () => {
     const navigate = useNavigate();
     const [postInputs, setPostInputs] = useState<SignupInputs>({
         email: "",
@@ -32,7 +32,7 @@ export const Auth = () => {
                         Create an account
                     </div>
                     <div className="text-slate-500">
-                        "Already have an account?"
+                        Already have an account?
                         <Link className="pl-2 underline" to={"/signin"}>
                             Sign in
                         </Link>
@@ -57,8 +57,8 @@ export const Auth = () => {
                             password: e.target.value
                         })
                     }} />
-                    <button onClick={sendRequest} type="button" className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
-                        "Sign up"
+                    <button onClick={sendRequest} type="button" className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                        Sign up
                     </button>
                 </div>
             </div>
@@ -76,6 +76,6 @@ interface LabelledInputType {
 function LabelledInput({ label, placeholder, onChange, type }: LabelledInputType) {
     return <div>
         <label className="block mb-2 text-sm text-black font-semibold pt-4">{label}</label>
-        <input onChange={onChange} type={type || "text"} id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
+        <input onChange={onChange} type={type || "text"} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
     </div>
 }
