@@ -41,7 +41,7 @@ user.post('/signup', prismaMiddleware, async(c) => {
             },
         });
     
-        const token = await sign({ id: createdUser.id }, c.env.JWT_SECRET);
+        const token = await sign({ id: createdUser.id, name: createdUser.name }, c.env.JWT_SECRET);
         
         return c.json({ token });
     } catch (error) {
@@ -76,7 +76,7 @@ user.post('/signin', prismaMiddleware, async(c) => {
         return c.json({ message: 'Invalid password' }, 401);
         }
 
-        const token = await sign({ id: user.id }, c.env.JWT_SECRET);
+        const token = await sign({ id: user.id, name: user.name }, c.env.JWT_SECRET);
 
         return c.json({ token });
     } catch (error) {

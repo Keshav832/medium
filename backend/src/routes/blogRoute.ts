@@ -99,6 +99,7 @@ blog.get('/bulk', prismaMiddleware, async(c) => {
                 id: true,
                 title: true,
                 content: true,
+                createdAt: true,
                 author: {
                     select: { name: true }
                 }
@@ -136,6 +137,7 @@ blog.get('/:id', prismaMiddleware, async(c) => {
                 id: true,
                 title: true,
                 content: true,
+                createdAt: true,
                 author: {
                     select: { name: true }
                 }

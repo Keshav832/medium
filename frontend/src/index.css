@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* Hide scrollbar only for AuthLayout's form section */
+.custom-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

@@ -1,28 +1,28 @@
 export const BlogSkeleton = () => {
-    return <div role="status" className="animate-pulse">
-        <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md cursor-pointer">
-            <div className="flex">
-                <div className="h-4 w-4 bg-gray-200 rounded-full mb-4"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="flex justify-center flex-col pl-2">
-                    {/*Circle*/}
-                    <div className="h-1 w-1 rounded-full bg-slate-500"/>
-                </div>
-                <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-                    <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                </div>
+    return (
+        <div role="status" className="animate-pulse w-full max-w-full sm:max-w-screen-md mx-auto p-4 border-b border-slate-200 rounded-lg mb-6">
+            {/* Author Row */}
+            <div className="flex items-center gap-2 mb-3">
+                <div className="h-10 w-10 bg-gray-200 rounded-full"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded"></div>
+                <div className="h-1 w-1 rounded-full bg-gray-400"></div>
+                <div className="h-3 w-20 bg-gray-200 rounded"></div>
             </div>
-            <div className="text-xl font-semibold pt-2">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+
+            {/* Title */}
+            <div className="h-6 bg-gray-200 rounded mb-2"></div>
+
+            {/* Content */}
+            <div className="space-y-2">
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
             </div>
-            <div className="text-md font-thin">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-            </div>
-            <div className="text-slate-500 text-sm font-thin pt-4">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-            </div>
+
+            {/* Read time */}
+            <div className="h-3 bg-gray-200 rounded mt-4 w-24"></div>
+
+            <span className="sr-only">Loading...</span>
         </div>
-    <span className="sr-only">Loading...</span>
-</div>
-}
+    );
+};
