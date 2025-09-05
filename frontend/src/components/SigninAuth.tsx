@@ -14,7 +14,8 @@ export const SigninAuth = () => {
     async function sendRequest() {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs);
-            const jwt = response.data;
+            const jwt = response.data.token;
+
             localStorage.setItem("token", "Bearer " + jwt);
             navigate("/blogs");
         } catch(e) {
@@ -38,7 +39,7 @@ export const SigninAuth = () => {
                     </div>
                 </div>
                 <div className="pt-8">
-                    <LabelledInput label="Username" placeholder="harkirat@gmail.com" onChange={(e) => {
+                    <LabelledInput label="Username" placeholder="example@gmail.com" onChange={(e) => {
                         setPostInputs({
                             ...postInputs,
                             email: e.target.value

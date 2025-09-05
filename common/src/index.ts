@@ -12,13 +12,13 @@ export const signinInputs = z.object({
 })
 
 export const createPostInputs = z.object({
-    tiltle: z.string(),
+    title: z.string(),
     content: z.string()
 })
 
 export const updatePostInputs = z.object({
     id: z.string(),
-    tiltle: z.string(),
+    title: z.string(),
     content: z.string()
 })
 
