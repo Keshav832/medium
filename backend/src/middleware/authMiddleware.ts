@@ -19,7 +19,10 @@ export const authMiddleware = createMiddleware<{
         }
 
         // 3. Extract Bearer token
-        const token = authHeader.split(' ')[1];
+        if (!authHeader.startsWith("Bearer ")) {
+            return c.json({ error: "Unauthorized: Malformed token" }, 401)
+        }
+        const token = authHeader.split(" ")[1]
 
         // 4. Verify JWT
         let rawPayload;
