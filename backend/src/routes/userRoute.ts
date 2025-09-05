@@ -45,7 +45,7 @@ user.post('/signup', prismaMiddleware, async(c) => {
         const token = await sign({ id: createdUser.id }, c.env.JWT_SECRET);
         
         return c.json({
-            token: "Bearer " + token
+            token: token
         });
     } catch (error) {
         console.error(error);
@@ -85,7 +85,7 @@ user.post('/signin', prismaMiddleware, async(c) => {
         const token = await sign({ id: user.id }, c.env.JWT_SECRET);
 
         return c.json({
-            token: "Bearer " + token
+            token: token
         });
     } catch (error) {
         console.error(error)
