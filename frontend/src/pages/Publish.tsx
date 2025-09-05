@@ -17,7 +17,7 @@ export const Publish = () => {
     const username = getUsernameFromToken() || "Anonymous";
 
     useEffect(() => {
-        if (!editorRef.current) return;
+        if (!editorRef.current || quillInstance.current) return;
 
         quillInstance.current = new Quill(editorRef.current, {
             theme: "snow",
@@ -27,15 +27,25 @@ export const Publish = () => {
                     [{ header: [1, 2, 3, false] }],
                     ["bold", "italic", "underline", "strike"],
                     [{ list: "ordered" }, { list: "bullet" }],
-                    ["link", "image"],
+                    ["link"],
                     ["clean"],
                 ],
             },
         });
 
+        const editor = editorRef.current.querySelector(".ql-editor") as HTMLElement;
+        
+        const adjustHeight = () => {
+            editor.style.height = "auto"; // reset height
+            editor.style.height = editor.scrollHeight + "px"; // set to content height
+        };
+
         quillInstance.current.on("text-change", () => {
-            setContent(editorRef.current!.querySelector(".ql-editor")!.innerHTML);
+            setContent(editor.innerHTML);
+            adjustHeight();
         });
+
+        adjustHeight();
     }, []);
 
     const handlePublish = async () => {
@@ -74,14 +84,14 @@ export const Publish = () => {
 
                     <div
                         ref={editorRef}
-                        className="bg-white rounded-lg h-64 md:h-96"
+                        className="bg-white rounded-lg h-64 md:h-96 min-h-[200px]"
                     ></div>
 
                     <button
                         onClick={handlePublish}
                         className="mt-4 inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-200"
                     >
-                        Publish post
+                        Publish blog
                     </button>
                 </div>
             </div>
