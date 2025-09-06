@@ -30,6 +30,7 @@ blog.post('/', authMiddleware, prismaMiddleware, async(c) => {
             data: {
                 title: body.title,
                 content: body.content,
+                published: true,
                 authorId: userID
             },
         })
@@ -93,6 +94,7 @@ blog.get('/bulk', prismaMiddleware, async(c) => {
         
         const posts = await prisma.post.findMany({
             where: {
+                published: true,
                 deletedAt: null,
             },
             select: {
@@ -131,6 +133,7 @@ blog.get('/:id', prismaMiddleware, async(c) => {
         const post = await prisma.post.findFirst({
             where: {
                 id: postId,
+                published: true,
                 deletedAt: null,
             },
             select: {
