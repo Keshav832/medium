@@ -34,7 +34,9 @@ export const FullBlog = ({ blog, username }: FullBlogProps) => {
                         <div className="bg-white rounded-lg shadow-md p-4">
                             <div className="text-slate-600 text-lg font-medium pb-2">Author</div>
                             <div className="flex items-center gap-4">
-                                <Avatar size="big" name={blog.author.name || "Anonymous"} />
+                                <div>
+                                    <Avatar size="big" name={blog.author.name || "Anonymous"} />
+                                </div>
                                 <div>
                                     <div className="text-xl font-bold">{blog.author.name || "Anonymous"}</div>
                                     <div className="pt-2 text-slate-500 text-sm">
